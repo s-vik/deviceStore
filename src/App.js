@@ -1,12 +1,16 @@
-import { Container } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 import "./App.css";
-import Goods from "./components/Goods/Goods";
+import Sidebar from "./components/Sidebar/Sidebar";
+import GoodsContainer from './components/Goods/GoodsContainer';
 
 const App = () => {
   return (
     <Container>
-      <Goods />
+      <Row>
+        <Sidebar />
+        <GoodsContainer />
+      </Row>
     </Container>
   );
 };
