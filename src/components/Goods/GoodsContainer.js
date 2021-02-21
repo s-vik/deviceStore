@@ -1,18 +1,40 @@
 import { connect } from "react-redux";
 import Goods from "./Goods";
 import { getGoods } from "./../../redux/goods-reducer";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import Preloader from "../Preloader/Preloader";
+import orderBy from "lodash/orderBy";
 
-const GoodsContainer = ({ items, getGoods }) => {
-    useEffect(()=>{
-        getGoods()
-    },[getGoods])
-  return items? <Goods items={items} />: <Preloader />;
+const sortBy = (goods, filterBy, min, max) => {
+  if(min) {
+    goods = goods.filter(o=> o.price >= min)
+  }
+  if(max && min) {
+    goods = goods.filter(o=> o.price >= min && o.price <= max )
+  }
+  switch (filterBy) {
+    case "price_low":
+      return orderBy(goods, "price", "asc");
+    case "price_high":
+      return orderBy(goods, "price", "desc");
+    case "alphabet":
+      return orderBy(goods, "name", "asc");
+    default:
+      return goods
+  }
 };
 
-const mapStateToProps = ({ goods }) => ({
-  items: goods.items,
+const GoodsContainer = ({ items, getGoods,currency }) => {
+  useEffect(() => {
+    getGoods();
+  }, [getGoods]);
+
+  return items ? <Goods currency={currency} items={items} /> : <Preloader />;
+};
+
+const mapStateToProps = ({goods,filter}) => ({
+  items:goods.items && sortBy(goods.items, filter.filterBy, filter.priceMin, filter.priceMax),
+  currency:goods.currency
 });
 
 export default connect(mapStateToProps, { getGoods })(GoodsContainer);
