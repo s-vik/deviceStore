@@ -24,17 +24,20 @@ const sortBy = (goods, filterBy, min, max) => {
   }
 };
 
-const GoodsContainer = ({ items, getGoods,currency }) => {
+const GoodsContainer = ({ items, getGoods, currency, newGoods }) => {
+ 
   useEffect(() => {
     getGoods();
-  }, [getGoods]);
+    newGoods.length > 0 && localStorage.setItem("newGoods", JSON.stringify(newGoods));
+  }, [getGoods,newGoods]);
 
   return items ? <Goods currency={currency} items={items} /> : <Preloader />;
 };
 
 const mapStateToProps = ({goods,filter}) => ({
   items:goods.items && sortBy(goods.items, filter.filterBy, filter.priceMin, filter.priceMax),
-  currency:goods.currency
+  currency:goods.currency,
+  newGoods:goods.newGoods
 });
 
 export default connect(mapStateToProps, { getGoods })(GoodsContainer);

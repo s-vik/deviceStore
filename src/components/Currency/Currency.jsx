@@ -3,7 +3,7 @@ import { ButtonGroup, ToggleButton } from "react-bootstrap";
 const Currency =({currency,toggleCurrencyUSD,toggleCurrencyUAH})=> {
     return (
       <>
-      <h5 >Currency</h5>
+      <h5>Валюта</h5>
         <ButtonGroup toggle>
          
             <ToggleButton

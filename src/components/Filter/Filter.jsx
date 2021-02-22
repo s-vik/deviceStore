@@ -5,7 +5,7 @@ const Filter = ({ filterBy, setFilterBy }) => {
     <fieldset>
       <Form.Group>
         <Form.Label as="legend" column sm={2}>
-          Sort
+          Сортировка
         </Form.Label>
         <Col>
           <Form.Check

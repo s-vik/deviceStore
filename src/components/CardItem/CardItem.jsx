@@ -1,6 +1,6 @@
 import { Card, Col, ListGroup, ListGroupItem } from "react-bootstrap";
 
-const CardItem = ({ id, description, image, name, price, currency }) => {
+const CardItem = ({ description, image, name, price, currency }) => {
   return (
     <Col md={4}>
       <Card style={{ width: "18rem", margin: "15px" }} className="p-3">
@@ -14,10 +14,6 @@ const CardItem = ({ id, description, image, name, price, currency }) => {
         <ListGroup className="list-group-flush">
           <ListGroupItem>Price: {price} {currency}</ListGroupItem>
         </ListGroup>
-        {/* <Card.Body>
-          <Card.Link href="#">Card Link</Card.Link>
-          <Card.Link href="#">Another Link</Card.Link>
-        </Card.Body> */}
       </Card>
     </Col>
   );
